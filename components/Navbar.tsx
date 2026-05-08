@@ -41,7 +41,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="mx-auto flex h-16 max-w-[1680px] items-center justify-between px-4 sm:px-6 xl:px-8">
         {/* Logo */}
         <motion.a
           href="#"
@@ -107,7 +107,7 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="md:hidden overflow-hidden bg-[#0B1426]/98 backdrop-blur-md border-b border-white/5"
           >
-            <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-2">
+            <div className="mx-auto flex max-w-[1680px] flex-col gap-2 px-4 py-4 sm:px-6">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.label}

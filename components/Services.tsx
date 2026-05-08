@@ -68,20 +68,20 @@ const cardVariants = {
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-28 bg-silver-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="bg-silver-50 py-16 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-16"
+          className="mb-12 text-center md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric-500/30 bg-electric-500/5 text-electric-600 text-sm font-medium mb-6">
             What We Offer
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-[#0B1426] mb-5 leading-tight">
+          <h2 className="mb-5 text-3xl font-display font-bold leading-tight text-[#0B1426] sm:text-4xl md:text-5xl">
             Four Solutions,{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-500 to-sky-500">
               Infinite Impact
@@ -107,7 +107,7 @@ export default function Services() {
                 key={service.title}
                 variants={cardVariants}
                 whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className={`group relative bg-white rounded-2xl p-6 border border-silver-200 shadow-sm hover:shadow-2xl transition-all duration-300 cursor-pointer ${service.hoverBorder} ${service.hoverGlow} hover:shadow-xl`}
+                className={`group relative cursor-pointer overflow-hidden rounded-xl border border-silver-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-2xl ${service.hoverBorder} ${service.hoverGlow} hover:shadow-xl`}
               >
                 {/* Icon */}
                 <div
@@ -132,7 +132,7 @@ export default function Services() {
 
                 {/* Hover gradient accent */}
                 <div
-                  className={`absolute inset-x-0 bottom-0 h-1 rounded-b-2xl bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                  className={`absolute inset-x-0 bottom-0 h-1 rounded-b-xl bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                 />
               </motion.div>
             )

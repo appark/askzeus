@@ -72,20 +72,20 @@ const cardVariants = {
 
 export default function Industries() {
   return (
-    <section id="industries" className="py-24 md:py-28 bg-silver-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="industries" className="bg-silver-50 py-16 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-16"
+          className="mb-12 text-center md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric-500/30 bg-electric-500/5 text-electric-600 text-sm font-medium mb-6">
             Industries We Serve
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-[#0B1426] mb-5 leading-tight">
+          <h2 className="mb-5 text-3xl font-display font-bold leading-tight text-[#0B1426] sm:text-4xl md:text-5xl">
             Built for{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-500 to-sky-500">
               Your Industry
@@ -111,7 +111,7 @@ export default function Industries() {
                 key={industry.name}
                 variants={cardVariants}
                 whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                className={`group relative bg-white rounded-2xl p-8 border border-silver-200 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden ${industry.borderHover}`}
+                className={`group relative overflow-hidden rounded-xl border border-silver-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-2xl sm:p-8 ${industry.borderHover}`}
               >
                 {/* Background gradient */}
                 <div

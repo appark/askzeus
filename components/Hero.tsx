@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronDown, Zap } from 'lucide-react'
+import { ArrowRight, Zap } from 'lucide-react'
 
 interface Particle {
   id: number
@@ -54,7 +54,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#0B1426] overflow-hidden">
+    <section className="relative flex min-h-[700px] flex-col items-center justify-start overflow-hidden bg-[#0B1426] pt-24 sm:pt-28 lg:pt-28">
       {/* Background effects layer */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Dark radial gradient overlay */}
@@ -73,13 +73,13 @@ export default function Hero() {
         />
 
         {/* Electric blue glow orb — bottom left */}
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-electric-500/10 blur-[120px]" />
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-electric-500/10 blur-[100px] sm:blur-[120px]" />
 
         {/* Gold glow orb — top right */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-gold-500/10 blur-[120px]" />
+        <div className="absolute -top-24 -right-24 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-gold-500/10 blur-[100px] sm:blur-[120px]" />
 
         {/* Additional subtle orb center */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-electric-500/5 blur-[100px]" />
+        <div className="absolute top-1/3 left-1/2 h-48 w-[min(92vw,600px)] -translate-x-1/2 rounded-full bg-electric-500/5 blur-[90px] sm:h-[300px] sm:blur-[100px]" />
 
         {/* Floating particles */}
         {particles.map((p) => (
@@ -112,11 +112,11 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center max-w-5xl mx-auto px-6 pt-24 pb-16"
+        className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-12 text-center sm:px-6 sm:pb-16"
       >
         {/* Badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric-500/30 bg-electric-500/10 text-electric-400 text-sm font-medium backdrop-blur-sm">
+        <motion.div variants={itemVariants} className="mb-6 flex justify-center sm:mb-8">
+          <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-4 py-2 text-sm font-medium text-electric-400 backdrop-blur-sm">
             <Zap className="w-3.5 h-3.5 fill-electric-400" />
             AI + Operations Consulting
           </div>
@@ -125,13 +125,13 @@ export default function Hero() {
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="font-display font-bold leading-tight mb-6"
+          className="mb-5 font-display font-bold leading-tight sm:mb-6"
         >
-          <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight">
+          <span className="block text-4xl text-white tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             Ask Zeus.
           </span>
           <span
-            className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-electric-400 via-electric-300 to-sky-300"
+            className="block text-4xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-electric-400 via-electric-300 to-sky-300 sm:text-6xl md:text-7xl lg:text-8xl"
           >
             Get Answers.
           </span>
@@ -140,7 +140,7 @@ export default function Hero() {
         {/* Subheadline */}
         <motion.p
           variants={itemVariants}
-          className="text-silver-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
+          className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-silver-400 sm:mb-10 sm:text-xl"
         >
           Transform your small business with AI-powered insights and{' '}
           <span className="text-silver-200 font-medium">33 years</span> of real-world operations expertise.
@@ -149,14 +149,14 @@ export default function Hero() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="mb-8 flex flex-col items-stretch justify-center gap-3 sm:mb-10 sm:flex-row sm:items-center sm:gap-4"
         >
           <motion.a
             href="#contact"
             onClick={(e) => { e.preventDefault(); handleScroll('#contact') }}
             whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(14,165,233,0.45)' }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-electric-500 text-white font-semibold text-lg shadow-lg shadow-electric-500/25 hover:bg-electric-600 transition-colors duration-200"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-electric-500 px-5 py-3.5 text-base font-semibold text-white shadow-lg shadow-electric-500/25 transition-colors duration-200 hover:bg-electric-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
           >
             Start Your Journey
             <ArrowRight className="w-5 h-5" />
@@ -166,7 +166,7 @@ export default function Hero() {
             onClick={(e) => { e.preventDefault(); handleScroll('#services') }}
             whileHover={{ scale: 1.03, borderColor: 'rgba(14,165,233,0.8)' }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-electric-500/40 text-electric-300 font-semibold text-lg hover:bg-electric-500/10 transition-all duration-200 backdrop-blur-sm"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-electric-500/40 px-5 py-3.5 text-base font-semibold text-electric-300 backdrop-blur-sm transition-all duration-200 hover:bg-electric-500/10 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
           >
             See Our Services
           </motion.a>
@@ -175,42 +175,23 @@ export default function Hero() {
         {/* Stats bar */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex flex-col sm:flex-row items-center gap-6 sm:gap-0 px-8 py-5 rounded-2xl border border-white/8 bg-white/5 backdrop-blur-sm"
+          className="mx-auto flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border border-white/8 bg-white/5 px-5 py-5 backdrop-blur-sm sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:justify-center sm:gap-0 sm:px-8"
         >
           <div className="text-center sm:px-8">
-            <div className="text-2xl font-display font-bold text-white">33 Years</div>
+            <div className="text-xl font-display font-bold text-white sm:text-2xl">33 Years</div>
             <div className="text-silver-400 text-sm mt-0.5">Experience</div>
           </div>
           <div className="hidden sm:block w-px h-10 bg-white/10" />
           <div className="text-center sm:px-8">
-            <div className="text-2xl font-display font-bold text-white">4 Core</div>
+            <div className="text-xl font-display font-bold text-white sm:text-2xl">4 Core</div>
             <div className="text-silver-400 text-sm mt-0.5">Solutions</div>
           </div>
           <div className="hidden sm:block w-px h-10 bg-white/10" />
           <div className="text-center sm:px-8">
-            <div className="text-2xl font-display font-bold text-white">AI-Powered</div>
+            <div className="text-xl font-display font-bold text-white sm:text-2xl">AI-Powered</div>
             <div className="text-silver-400 text-sm mt-0.5">Insights</div>
           </div>
         </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
-        <motion.a
-          href="#services"
-          onClick={(e) => { e.preventDefault(); handleScroll('#services') }}
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-1 text-silver-500 hover:text-silver-300 transition-colors"
-        >
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <ChevronDown className="w-4 h-4" />
-        </motion.a>
       </motion.div>
     </section>
   )

@@ -35,11 +35,11 @@ const itemVariants = {
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="py-24 md:py-28 bg-[#0B1426] relative overflow-hidden">
+    <section id="why-us" className="relative overflow-hidden bg-[#0B1426] py-16 sm:py-20 md:py-28">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-electric-500/5 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-gold-500/5 blur-[120px]" />
+        <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-electric-500/5 blur-[100px] sm:h-96 sm:w-96 sm:blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-gold-500/5 blur-[100px] sm:h-96 sm:w-96 sm:blur-[120px]" />
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -49,8 +49,8 @@ export default function WhyUs() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <motion.div
             variants={containerVariants}
@@ -66,7 +66,7 @@ export default function WhyUs() {
 
             <motion.h2
               variants={itemVariants}
-              className="text-4xl md:text-5xl font-display font-bold text-white mb-6 leading-tight"
+              className="mb-6 text-3xl font-display font-bold leading-tight text-white sm:text-4xl md:text-5xl"
             >
               33 Years of Expertise.{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-400 to-sky-300">
@@ -76,7 +76,7 @@ export default function WhyUs() {
 
             <motion.p
               variants={itemVariants}
-              className="text-silver-400 text-lg leading-relaxed mb-8"
+              className="mb-8 text-base leading-relaxed text-silver-400 sm:text-lg"
             >
               We are not a typical consulting firm. We are trusted advisors who combine three decades of real-world operations
               experience with cutting-edge AI to deliver solutions that actually work — built for how small businesses operate today.
@@ -122,19 +122,19 @@ export default function WhyUs() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
           >
             {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="relative bg-[#0F1F3D] rounded-2xl p-6 border border-white/8 hover:border-white/15 transition-all duration-300 group overflow-hidden"
+                className="group relative overflow-hidden rounded-xl border border-white/8 bg-[#0F1F3D] p-5 transition-all duration-300 hover:border-white/15 sm:p-6"
               >
                 {/* Subtle glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-electric-500/0 to-electric-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-electric-500/0 to-electric-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                <div className={`text-4xl md:text-5xl font-display font-bold mb-2 ${stat.accent}`}>
+                <div className={`mb-2 text-3xl font-display font-bold sm:text-4xl md:text-5xl ${stat.accent}`}>
                   {stat.value}
                 </div>
                 <div className="text-silver-400 text-sm leading-snug relative z-10">

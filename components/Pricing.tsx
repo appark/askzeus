@@ -77,25 +77,25 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className="py-24 md:py-28 bg-white relative overflow-hidden">
+    <section id="pricing" className="relative overflow-hidden bg-white py-16 sm:py-20 md:py-28">
       {/* Subtle background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-electric-500/5 to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[320px] w-[min(100vw,800px)] -translate-x-1/2 bg-gradient-to-b from-electric-500/5 to-transparent blur-3xl sm:h-[400px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-16"
+          className="mb-12 text-center md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric-500/30 bg-electric-500/5 text-electric-600 text-sm font-medium mb-6">
             Pricing
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-[#0B1426] mb-5 leading-tight">
+          <h2 className="mb-5 text-3xl font-display font-bold leading-tight text-[#0B1426] sm:text-4xl md:text-5xl">
             Simple,{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-500 to-sky-500">
               Transparent Pricing
@@ -119,9 +119,9 @@ export default function Pricing() {
               key={plan.name}
               variants={cardVariants}
               whileHover={!plan.popular ? { y: -4, transition: { duration: 0.2 } } : {}}
-              className={`relative rounded-2xl p-8 flex flex-col ${
+              className={`relative flex flex-col rounded-xl p-6 sm:p-8 ${
                 plan.popular
-                  ? 'bg-[#0B1426] border-2 border-electric-500 md:scale-105 shadow-2xl shadow-electric-500/25 z-10'
+                  ? 'z-10 border-2 border-electric-500 bg-[#0B1426] shadow-2xl shadow-electric-500/25'
                   : 'bg-silver-50 border border-silver-200 hover:border-electric-500/30 hover:shadow-xl transition-all duration-300'
               }`}
             >
@@ -152,7 +152,7 @@ export default function Pricing() {
               <div className="mb-8">
                 <div className="flex items-end gap-1">
                   <span
-                    className={`text-5xl font-display font-bold ${
+                    className={`text-4xl font-display font-bold sm:text-5xl ${
                       plan.popular ? 'text-white' : 'text-[#0B1426]'
                     }`}
                   >
@@ -217,15 +217,15 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12"
+          className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
         >
-          <div className="flex items-center gap-3 px-6 py-3 rounded-full border border-silver-200 bg-silver-50">
+          <div className="flex w-full max-w-sm items-center gap-3 rounded-full border border-silver-200 bg-silver-50 px-4 py-3 sm:w-auto sm:max-w-none sm:px-6">
             <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
               <Check className="w-3 h-3 text-green-600" />
             </div>
             <span className="text-silver-600 text-sm font-medium">30-day money-back guarantee</span>
           </div>
-          <div className="flex items-center gap-3 px-6 py-3 rounded-full border border-silver-200 bg-silver-50">
+          <div className="flex w-full max-w-sm items-center gap-3 rounded-full border border-silver-200 bg-silver-50 px-4 py-3 sm:w-auto sm:max-w-none sm:px-6">
             <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
               <Check className="w-3 h-3 text-green-600" />
             </div>

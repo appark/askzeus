@@ -68,11 +68,11 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-28 bg-[#0B1426] relative overflow-hidden">
+    <section id="contact" className="relative overflow-hidden bg-[#0B1426] py-16 sm:py-20 md:py-28">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-electric-500/8 blur-[140px]" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-gold-500/6 blur-[140px]" />
+        <div className="absolute left-0 top-0 h-64 w-64 rounded-full bg-electric-500/8 blur-[110px] sm:h-96 sm:w-96 sm:blur-[140px]" />
+        <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-gold-500/6 blur-[110px] sm:h-96 sm:w-96 sm:blur-[140px]" />
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -82,30 +82,30 @@ export default function Contact() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12 text-center md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric-500/30 bg-electric-500/10 text-electric-400 text-sm font-medium mb-6">
             Let&apos;s Talk
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-5 leading-tight">
+          <h2 className="mb-5 text-3xl font-display font-bold leading-tight text-white sm:text-4xl md:text-5xl">
             Ready to Transform{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-400 to-sky-300">
               Your Business?
             </span>
           </h2>
-          <p className="text-silver-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-silver-400 sm:text-lg">
             Take the first step toward smarter operations and AI-powered growth. We&apos;d love to hear about your business.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12">
           {/* Left column — contact info */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -140,7 +140,7 @@ export default function Contact() {
             </div>
 
             {/* Decorative element */}
-            <div className="mt-12 p-6 rounded-2xl border border-white/8 bg-white/3">
+            <div className="mt-10 rounded-xl border border-white/8 bg-white/3 p-5 sm:mt-12 sm:p-6">
               <div className="text-gold-400 text-4xl font-display font-bold mb-2">33+</div>
               <div className="text-white font-semibold mb-1">Years of Real-World Experience</div>
               <div className="text-silver-400 text-sm leading-relaxed">
@@ -156,7 +156,7 @@ export default function Contact() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
-            <div className="bg-[#0F1F3D] rounded-2xl border border-white/8 p-8">
+            <div className="rounded-xl border border-white/8 bg-[#0F1F3D] p-5 sm:p-8">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
