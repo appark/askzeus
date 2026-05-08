@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BarChart3, Bot, TrendingUp, Smartphone, ArrowRight } from 'lucide-react'
+import { BarChart3, Bot, TrendingUp, Smartphone } from 'lucide-react'
 
 const services = [
   {
@@ -124,11 +124,6 @@ export default function Services() {
                   {service.description}
                 </p>
 
-                {/* Learn more link */}
-                <div className={`inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-200 ${service.iconColor} group-hover:gap-2.5`}>
-                  Learn more
-                  <ArrowRight className="w-4 h-4" />
-                </div>
 
                 {/* Hover gradient accent */}
                 <div
