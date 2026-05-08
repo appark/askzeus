@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="absolute bottom-0 left-1/2 h-[200px] w-[min(92vw,600px)] -translate-x-1/2 bg-electric-500/4 blur-[100px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1680px] px-4 pb-8 pt-14 sm:px-6 sm:pt-16 xl:px-8">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-6 pb-8 pt-14 sm:px-10 sm:pt-16 xl:px-16">
         {/* Main footer grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Column 1: Logo + tagline */}

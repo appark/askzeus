@@ -83,7 +83,7 @@ export default function Pricing() {
         <div className="absolute left-1/2 top-0 h-[320px] w-[min(100vw,800px)] -translate-x-1/2 bg-gradient-to-b from-electric-500/5 to-transparent blur-3xl sm:h-[400px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-6 sm:px-10 xl:px-16">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

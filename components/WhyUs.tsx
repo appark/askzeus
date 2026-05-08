@@ -49,7 +49,7 @@ export default function WhyUs() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-6 sm:px-10 xl:px-16">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <motion.div

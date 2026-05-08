@@ -82,7 +82,7 @@ export default function Contact() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1680px] px-4 sm:px-6 xl:px-8">
+      <div className="relative z-10 mx-auto max-w-[1680px] px-6 sm:px-10 xl:px-16">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
