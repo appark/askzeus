@@ -43,10 +43,10 @@ const services = [
     description:
       'Cut out the middleman. Launch your own branded ordering system and keep 100% of your margins.',
     color: 'from-gold-500/20 to-gold-600/10',
-    iconColor: 'text-gold-400',
-    iconBg: 'bg-gold-500/10 ring-gold-500/20',
-    hoverBorder: 'hover:border-gold-500/40',
-    hoverGlow: 'hover:shadow-gold-500/10',
+    iconColor: 'text-electric-400',
+    iconBg: 'bg-electric-500/10 ring-electric-500/20',
+    hoverBorder: 'hover:border-electric-500/40',
+    hoverGlow: 'hover:shadow-electric-500/10',
   },
 ]
 
