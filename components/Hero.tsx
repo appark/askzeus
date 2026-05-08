@@ -127,11 +127,11 @@ export default function Hero() {
           variants={itemVariants}
           className="font-display font-bold leading-tight mb-6"
         >
-          <span className="block text-6xl sm:text-7xl md:text-8xl text-white tracking-tight">
+          <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight">
             Ask Zeus.
           </span>
           <span
-            className="block text-6xl sm:text-7xl md:text-8xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-electric-400 via-electric-300 to-sky-300"
+            className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-electric-400 via-electric-300 to-sky-300"
           >
             Get Answers.
           </span>

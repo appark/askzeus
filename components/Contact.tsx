@@ -108,8 +108,8 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left column — contact info */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
@@ -151,10 +151,10 @@ export default function Contact() {
 
           {/* Right column — form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
             <div className="bg-[#0F1F3D] rounded-2xl border border-white/8 p-8">
               {submitted ? (

@@ -112,7 +112,7 @@ export default function Pricing() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:items-start"
         >
           {plans.map((plan) => (
             <motion.div
@@ -121,7 +121,7 @@ export default function Pricing() {
               whileHover={!plan.popular ? { y: -4, transition: { duration: 0.2 } } : {}}
               className={`relative rounded-2xl p-8 flex flex-col ${
                 plan.popular
-                  ? 'bg-[#0B1426] border-2 border-electric-500 scale-105 shadow-2xl shadow-electric-500/25 z-10'
+                  ? 'bg-[#0B1426] border-2 border-electric-500 md:scale-105 shadow-2xl shadow-electric-500/25 z-10'
                   : 'bg-silver-50 border border-silver-200 hover:border-electric-500/30 hover:shadow-xl transition-all duration-300'
               }`}
             >
