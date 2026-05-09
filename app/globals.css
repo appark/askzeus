@@ -65,3 +65,10 @@ body {
   70% { transform: translate(9%, 4%); }
   90% { transform: translate(-1%, 7%); }
 }
+
+/* Blog article body styles */
+.article-body h2 { @apply text-2xl font-display font-bold text-[#0B1426] mt-8 mb-4; }
+.article-body p { @apply text-silver-600 leading-relaxed mb-5 text-base; }
+.article-body ul { @apply list-disc list-inside space-y-2 mb-5 text-silver-600; }
+.article-body li { @apply leading-relaxed; }
+.article-body strong { @apply text-[#0B1426] font-semibold; }
