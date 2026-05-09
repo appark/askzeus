@@ -59,7 +59,7 @@ export default function Footer() {
             </p>
 
             <p className="text-silver-500 text-xs">
-              &copy; 2024 Ask Zeus LLC. All rights reserved.
+              &copy; 2025 Ask Zeus LLC. All rights reserved.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-silver-500 text-xs">
-            &copy; 2024 Ask Zeus LLC. All rights reserved.
+            &copy; 2025 Ask Zeus LLC. All rights reserved.
           </p>
           <p className="text-silver-500 text-xs">
             Built for small business.{' '}
