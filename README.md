@@ -1,9 +1,10 @@
 # Ask Zeus — AI + Operations Consulting Website
 
 > **"Ask Zeus. Get Answers."**
-> The official marketing website for Ask Zeus LLC — an AI-powered operations consulting company helping downtown small businesses (restaurants, cafes, retail, hospitality) run smarter through data, automation, and 33+ years of real-world operations expertise.
+> The official marketing website for Ask Zeus LLC — an AI-powered operations consulting company helping small businesses in Davis and Sacramento CA run smarter through data, automation, and 33+ years of real-world operations expertise.
 
-Live site: [askzeus.io](https://askzeus.io) · Contact: hello@askzeus.io
+**Live site:** [www.askzeus.io](https://www.askzeus.io) · **Email:** hello@askzeus.io  
+**GitHub:** [github.com/appark/askzeus](https://github.com/appark/askzeus) · **Vercel Project:** zeus-8a6a51bb/askzeus
 
 ---
 
@@ -14,25 +15,30 @@ Live site: [askzeus.io](https://askzeus.io) · Contact: hello@askzeus.io
 3. [Project Structure](#project-structure)
 4. [Design System](#design-system)
 5. [Component Reference](#component-reference)
-6. [Getting Started](#getting-started)
-7. [Development](#development)
-8. [Building for Production](#building-for-production)
-9. [Deployment](#deployment)
-10. [Customization Guide](#customization-guide)
-11. [SEO & Metadata](#seo--metadata)
-12. [Business Context](#business-context)
+6. [Blog System](#blog-system)
+7. [Contact Form & Email](#contact-form--email)
+8. [SEO & Metadata](#seo--metadata)
+9. [Sitemap & Robots](#sitemap--robots)
+10. [Getting Started](#getting-started)
+11. [Development](#development)
+12. [Building for Production](#building-for-production)
+13. [Deployment](#deployment)
+14. [Environment Variables](#environment-variables)
+15. [Customization Guide](#customization-guide)
+16. [Business Context](#business-context)
 
 ---
 
 ## Project Overview
 
-Ask Zeus is a single-page marketing website built to convert downtown business owners into consulting clients. The site communicates four core service packages, establishes credibility through real operational credentials, and captures leads via an inline contact form.
+Ask Zeus is a full marketing website built to convert small business owners in Davis and Sacramento CA into consulting clients. The site communicates four core service packages, establishes credibility through real operational credentials, captures leads via a working contact form that delivers to `hello@askzeus.io`, and builds SEO authority through a keyword-targeted blog.
 
 **Key goals of the site:**
 - Communicate a clear value proposition: AI + real-world operations experience, not just tech buzzwords
-- Target decision-makers at restaurants, retail shops, cafes, and hospitality businesses
-- Drive inbound inquiries through a frictionless contact form
-- Look and feel like a premium technology company, not a generic local consultant
+- Target decision-makers at restaurants, retail shops, cafes, and hospitality businesses in Davis/Sacramento
+- Drive inbound inquiries through a contact form connected to Resend (live email delivery)
+- Build local SEO authority through blog posts targeting Davis CA and Sacramento CA keywords
+- Look and feel like a premium technology firm, not a generic local consultant
 
 ---
 
@@ -40,22 +46,23 @@ Ask Zeus is a single-page marketing website built to convert downtown business o
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
-| Framework | [Next.js](https://nextjs.org) (App Router) | 14.x |
+| Framework | Next.js (App Router) | 14.x |
 | Language | TypeScript | 5.x |
 | Styling | Tailwind CSS | 3.4.x |
 | Animations | Framer Motion | 11.x |
 | Icons | Lucide React | 0.400.x |
 | Form Styles | @tailwindcss/forms | 0.5.x |
-| Fonts | DM Sans (display) + Inter (body) | via CSS variables |
-| Deployment | Vercel | — |
+| Email Delivery | Resend | 6.x |
+| Sitemap | next-sitemap | 4.x |
+| Fonts | DM Sans (display) + Inter (body) | via next/font/google |
+| Deployment | Vercel | Auto-deploy from GitHub |
 
-**Why this stack?**
-
-- **Next.js 14 App Router** — Server components by default, fast page loads, built-in SEO metadata API, zero-config Vercel deployment
-- **Tailwind CSS** — Utility-first approach makes responsive design fast and consistent; custom design tokens live in `tailwind.config.ts`
-- **Framer Motion** — Powers all entrance animations, hover effects, and the mobile menu. Uses `whileInView` for scroll-triggered reveals
-- **Lucide React** — Clean, consistent icon set. Tree-shakeable so only used icons are bundled
-- **TypeScript** — Type safety across all components and form state
+**Why this stack:**
+- **Next.js 14 App Router** — Server components by default, fast page loads, built-in SEO metadata API, static generation for all blog posts, zero-config Vercel deployment
+- **Tailwind CSS** — Utility-first; all design tokens live in `tailwind.config.ts`
+- **Framer Motion** — All entrance animations, hover effects, mobile menu. Uses `whileInView` for scroll-triggered reveals
+- **Resend** — Modern email API purpose-built for Next.js. Delivers contact form submissions to `hello@askzeus.io`
+- **next-sitemap** — Generates valid XML sitemap and robots.txt after every production build via `postbuild` script
 
 ---
 
@@ -64,77 +71,106 @@ Ask Zeus is a single-page marketing website built to convert downtown business o
 ```
 askzeus/
 ├── app/
-│   ├── globals.css          # Global styles, Tailwind directives, font variables
-│   ├── layout.tsx           # Root layout — metadata, font loading, body wrapper
-│   └── page.tsx             # Single page — assembles all section components
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts         # Contact form API — sends email via Resend
+│   ├── blog/
+│   │   ├── page.tsx             # Blog index — server component, lists all posts
+│   │   └── [slug]/
+│   │       └── page.tsx         # Dynamic blog post — SSG, canonical URL, metadata
+│   ├── globals.css              # Tailwind directives, scrollbar, keyframes, article-body styles
+│   ├── layout.tsx               # Root layout — fonts, metadata, LocalBusiness + FAQ schema
+│   └── page.tsx                 # Homepage — assembles all section components
 │
 ├── components/
-│   ├── Navbar.tsx           # Fixed top navigation with scroll detection + mobile menu
-│   ├── Hero.tsx             # Landing hero with particles, headline, stats bar
-│   ├── Services.tsx         # Four service package cards
-│   ├── WhyUs.tsx            # Credentials section with differentiators and stats
-│   ├── Industries.tsx       # Four industry target cards
-│   ├── Pricing.tsx          # Three-tier pricing table
-│   ├── Contact.tsx          # Contact form with info sidebar
-│   └── Footer.tsx           # Three-column footer
+│   ├── Navbar.tsx               # Fixed top nav, scroll detection, mobile menu
+│   ├── Hero.tsx                 # Full-viewport hero with particles and animations
+│   ├── Services.tsx             # Four service package cards
+│   ├── WhyUs.tsx                # Credentials section with differentiators and stat cards
+│   ├── Industries.tsx           # Four industry target cards
+│   ├── BlogTeaser.tsx           # Three most recent blog posts (client component, animated)
+│   ├── Pricing.tsx              # Three-tier pricing table
+│   ├── Contact.tsx              # Contact form wired to /api/contact + info sidebar
+│   └── Footer.tsx               # Three-column footer with gold accent line
 │
-├── images/                  # Static image assets
-├── tailwind.config.ts       # Design tokens, custom colors, fonts, animations
-├── next.config.js           # Next.js configuration
-├── tsconfig.json            # TypeScript configuration
-├── postcss.config.js        # PostCSS (required by Tailwind)
-└── package.json
+├── lib/
+│   └── blog.ts                  # Blog post data, BlogPost interface, getPostBySlug helper
+│
+├── public/
+│   ├── robots.txt               # Generated by next-sitemap (allows all bots)
+│   ├── sitemap.xml              # Sitemap index — generated by next-sitemap
+│   └── sitemap-0.xml            # All URLs — generated by next-sitemap
+│
+├── images/                      # Screenshots and reference images (not served)
+├── next-sitemap.config.js       # next-sitemap configuration
+├── tailwind.config.ts           # Design tokens, colors, fonts, custom animations
+├── next.config.js               # Next.js configuration
+├── tsconfig.json                # TypeScript configuration (strict, @/ path alias)
+├── postcss.config.js            # PostCSS (required by Tailwind)
+├── .env.local                   # Local environment variables (git-ignored)
+└── package.json                 # Dependencies + postbuild script
 ```
 
 ---
 
 ## Design System
 
-All design tokens are defined in `tailwind.config.ts`. The palette uses three primary color families:
+All design tokens are defined in `tailwind.config.ts`.
 
 ### Color Palette
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `electric-300` | `#7DD3FC` | Light accent, gradient endpoints |
-| `electric-400` | `#38BDF8` | Primary icon color, text accents |
-| `electric-500` | `#0EA5E9` | Primary CTAs, buttons, focus rings |
+| `electric-300` | `#7DD3FC` | Light accents, gradient endpoints |
+| `electric-400` | `#38BDF8` | Icon colors, text accents, particle effects |
+| `electric-500` | `#0EA5E9` | Primary CTAs, buttons, focus rings, nav glow |
 | `electric-600` | `#0284C7` | Hover state on primary buttons |
 | `gold-400` | `#FBBF24` | Stat card accents, secondary highlights |
-| `gold-500` | `#F59E0B` | Footer accent line, decorative elements |
+| `gold-500` | `#F59E0B` | Footer accent line, decorative Zeus elements |
 | `gold-600` | `#D97706` | Gold hover states |
 | `silver-50` | `#F8FAFC` | Light section backgrounds |
 | `silver-200` | `#E2E8F0` | Card borders in light sections |
+| `silver-300` | `#CBD5E1` | Light text on dark backgrounds |
 | `silver-400` | `#94A3B8` | Body text on dark backgrounds |
 | `silver-500` | `#64748B` | Body text on light backgrounds |
-| `navy-600` / `#0B1426` | — | Primary dark background |
-| `navy-700` / `#0F1F3D` | — | Card backgrounds in dark sections |
+| `#0B1426` | — | Primary dark background (Hero, WhyUs, Contact, Footer, Navbar) |
+| `#0F1F3D` | — | Card backgrounds in dark sections |
 
 ### Typography
 
-| Role | Font | Weight | Notes |
-|------|------|--------|-------|
-| Display / Headings | DM Sans (`font-display`) | 700 (bold) | Used for all `h1`–`h3` and stat numbers |
-| Body | Inter (`font-sans`) | 400 / 500 | Used for paragraph text, labels |
+| Role | Font | Class | Weight |
+|------|------|-------|--------|
+| Display / Headings | DM Sans | `font-display` | 700 (bold) |
+| Body Text | Inter | `font-sans` | 400 / 500 |
 
-Fonts are loaded via CSS variables (`--font-dm-sans`, `--font-inter`) defined in `app/globals.css` and referenced in `tailwind.config.ts`.
+Fonts are loaded via `next/font/google` in `app/layout.tsx` and applied as CSS variables (`--font-dm-sans`, `--font-inter`).
 
-### Custom Animations
+### Custom Animations (tailwind.config.ts)
 
-Defined in `tailwind.config.ts` under `theme.extend.animation` / `keyframes`:
-
-| Class | Behavior | Used In |
+| Class | Duration | Behavior |
 |-------|----------|---------|
-| `animate-float` | Gentle 6s up-down float | Decorative elements |
-| `animate-pulse-glow` | Electric blue box-shadow pulse | CTA glow effects |
-| `animate-shimmer` | Horizontal gradient shimmer | Loading states |
+| `animate-float` | 6s | Gentle vertical float — decorative elements |
+| `animate-pulse-glow` | 2s | Electric blue box-shadow pulse |
+| `animate-shimmer` | 2s | Horizontal gradient shimmer |
 
 ### Background Utilities
 
 | Class | Description |
 |-------|-------------|
-| `bg-gradient-radial` | Radial gradient via CSS custom property |
-| `bg-hero-glow` | Elliptical electric blue glow at top of hero |
+| `bg-gradient-radial` | Radial gradient using CSS custom properties |
+| `bg-hero-glow` | Elliptical electric blue glow from top of hero |
+
+### Article Body Styles
+
+Blog post content is rendered via `dangerouslySetInnerHTML`. The `.article-body` class in `globals.css` styles child elements:
+
+```css
+.article-body h2 { @apply text-2xl font-display font-bold text-[#0B1426] mt-8 mb-4; }
+.article-body p  { @apply text-silver-600 leading-relaxed mb-5 text-base; }
+.article-body ul { @apply list-disc list-inside space-y-2 mb-5 text-silver-600; }
+.article-body li { @apply leading-relaxed; }
+.article-body strong { @apply text-[#0B1426] font-semibold; }
+```
 
 ---
 
@@ -142,13 +178,13 @@ Defined in `tailwind.config.ts` under `theme.extend.animation` / `keyframes`:
 
 ### `Navbar.tsx`
 
-Fixed top navigation bar. Transparent by default, gains a dark blur backdrop after 20px scroll.
+Fixed top navigation. Starts transparent; gains `bg-[#0B1426]/95 backdrop-blur-md border-b border-white/5` after 20px scroll.
 
-**Behavior:**
-- `scrolled` state triggers `bg-[#0B1426]/95 backdrop-blur-md border-b border-white/5`
-- All nav links use smooth `scrollIntoView` — no hard page navigation
-- Mobile: hamburger icon toggles an `AnimatePresence`-driven slide-down menu
-- Desktop CTA button links to `#contact`
+- All nav links use smooth `scrollIntoView` — no hard page reloads
+- Mobile: hamburger → `AnimatePresence`-driven slide-down menu with staggered links
+- Logo: Zap icon + "Ask Zeus" text, both link back to top
+- CTA "Get Started" scrolls to `#contact`
+- Entrance: `y: -80 → 0` on mount
 
 **Nav links:** Services · Why Us · Industries · Pricing · Contact
 
@@ -156,60 +192,67 @@ Fixed top navigation bar. Transparent by default, gains a dark blur backdrop aft
 
 ### `Hero.tsx`
 
-Full-width dark hero section. Client component because of particle generation.
+Full-viewport dark section. Client component (particle generation requires `useEffect`).
 
-**Features:**
-- 50 randomly generated floating particles (position, size, opacity, animation speed) — generated client-side in `useEffect` to avoid hydration mismatch
-- Layered background: radial gradient overlay → hero glow → dot grid → electric orb (bottom-left) → gold orb (top-right) → center blur orb → particles
-- `containerVariants` / `itemVariants` stagger children entrance animations (0.15s stagger, 0.7s duration)
+**Background layers (back to front):**
+1. Base `bg-[#0B1426]`
+2. Radial gradient overlay
+3. Hero glow (electric blue ellipse at top)
+4. Dot grid pattern (CSS `radial-gradient` dots, 32px grid)
+5. Electric blue blur orb (bottom-left)
+6. Gold blur orb (top-right)
+7. Center blur orb
+8. 50 randomly generated floating particles (position, size, opacity, float speed all randomized)
+
+**Content (staggered Framer Motion entrance, 0.15s stagger, 0.7s duration):**
+- Badge pill: "⚡ AI + Operations Consulting"
+- H1: "Ask Zeus." (white) + "Get Answers." (gradient blue-to-sky)
+- Subtitle mentioning Davis & Sacramento CA and 33 years experience
+- Two CTA buttons: "Start Your Journey" (→ `#contact`) and "See Our Services" (→ `#services`)
 - Stats bar: "33 Years Experience" · "4 Core Solutions" · "AI-Powered Insights"
-
-**CTA buttons:**
-- "Start Your Journey" → scrolls to `#contact`
-- "See Our Services" → scrolls to `#services`
+- Bouncing scroll indicator at bottom
 
 ---
 
 ### `Services.tsx`
 
-Light background (`bg-silver-50`) section with a 4-column responsive card grid.
+Light background (`bg-silver-50`). Responsive card grid: 1-col → 2-col → 4-col.
 
-**Service packages:**
-
-| # | Title | Icon | Color |
-|---|-------|------|-------|
+| # | Service | Icon | Color Theme |
+|---|---------|------|-------------|
 | 1 | Business Health Dashboard | `BarChart3` | Electric blue |
 | 2 | AI Reporting Assistant | `Bot` | Sky blue |
 | 3 | Ecommerce Optimization | `TrendingUp` | Electric light |
 | 4 | Direct Ordering Platform | `Smartphone` | Gold |
 
-**Card interactions:**
-- `whileHover={{ y: -8 }}` lift effect
-- Bottom border gradient accent fades in on hover (`opacity-0 group-hover:opacity-100`)
-- "Learn more" arrow gap expands on hover via `group-hover:gap-2.5`
+Card interactions:
+- `whileHover={{ y: -8 }}` lift
+- Bottom border gradient fades in on hover
+- "Learn more" arrow gap expands on hover
 
 ---
 
 ### `WhyUs.tsx`
 
-Dark background section establishing credibility. Two-column layout: bullet list (left) + stat cards grid (right).
+Dark background (`#0B1426`). Two-column layout on `lg:` breakpoint.
 
-**Differentiator bullets (left column):**
-- Defined in the `differentiators` array — easy to update
-- Each bullet uses a circle checkmark icon (`electric-400`)
+**Left column — differentiators:**
+- UC Davis enterprise IT leadership — systems that scale
+- Downtown business operations experience across hospitality, retail, and food service
+- Cannabis retail & ecommerce — POS integrations, analytics, and compliance
+- Hands-on implementation for Davis, Sacramento, and surrounding businesses
 
-**Stat cards (right column):**
-- 2×2 grid on `sm:` breakpoint
-- Cards: `33+` Years · `4` Offerings · `100%` Small Business Focus · `AI-First` Methodology
-- Gold and electric accent alternating
+**Right column — stat cards (2×2 grid):**
+- `33+` / Years of IT & Operations Experience (electric accent)
+- `UC Davis` / Enterprise IT Leadership Background (gold accent)
+- `Downtown` / Business Operations Experience (electric accent)
+- `AI-First` / Methodology & Tooling (gold accent)
 
 ---
 
 ### `Industries.tsx`
 
-Light background section. 2-column card grid (stacks to 1 on mobile).
-
-**Industries served:**
+Light background. 2-column card grid (1-col on mobile).
 
 | Industry | Icon | Color Theme |
 |----------|------|-------------|
@@ -218,67 +261,276 @@ Light background section. 2-column card grid (stacks to 1 on mobile).
 | Cafes & Coffee Shops | `Coffee` | Amber / Yellow |
 | Hospitality | `Building2` | Violet / Purple |
 
-Each card has a blurred radial gradient in the top-right corner that intensifies on hover.
+Each card has a blurred radial gradient orb (top-right) that intensifies on hover. Cards scale to `1.02` on hover.
+
+---
+
+### `BlogTeaser.tsx`
+
+Client component (Framer Motion). Shows the 3 most recent blog posts from `lib/blog.ts` between the Industries and Pricing sections.
+
+- Scroll-triggered stagger animation (0.12s between cards)
+- Cards: gradient top bar, date + read time, title, description, "Read More →" link
+- "View All Posts →" button links to `/blog`
+- Background: `bg-silver-50` with no top padding (flush against Industries)
 
 ---
 
 ### `Pricing.tsx`
 
-White background section. 3-column pricing table.
+White background. 3-column table (1-col on mobile, no `scale-105` on mobile to prevent overflow).
 
-**Plans:**
-
-| Plan | Price | Highlight |
-|------|-------|-----------|
+| Plan | Price | Style |
+|------|-------|-------|
 | Starter | $997/mo | Outline card |
-| Professional | $2,497/mo | **Featured** — dark card with electric border, "Most Popular" badge |
+| Professional | $2,497/mo | **Featured** — dark navy, electric border, "Most Popular" badge, `md:scale-105` |
 | Enterprise | Custom | Outline card |
 
-**Features by tier:**
-- Starter: Health Dashboard, Monthly AI Report, Email Support, 2 locations
-- Professional: Everything in Starter + AI Assistant, Ecommerce, Ordering Platform, Priority Support, Quarterly Strategy
-- Enterprise: Everything in Professional + Custom AI, Dedicated Consultant, Custom Reporting, SLA, White-glove onboarding
+Trust badges below: "30-day money-back guarantee" · "No long-term contracts required"
 
-Trust badges below the grid: "30-day money-back guarantee" · "No long-term contracts required"
+All plan CTAs scroll to `#contact`.
 
 ---
 
 ### `Contact.tsx`
 
-Dark background section. Two-column: info sidebar (left) + form (right).
+Dark background (`#0B1426`). Two columns on `lg:` breakpoint.
 
-**Form fields:**
-- Full Name (required)
-- Email Address (required)
-- Company Name (optional)
-- Service Interest (dropdown — maps to the 4 service packages + "Other")
-- Message (required, 4-row textarea)
+**Left column — contact info:**
+- Email: hello@askzeus.io (mailto link)
+- Response time: within 24 hours
+- Free consultation for new clients
+- Decorative card: "33+ Years of Real-World Experience" with UC Davis · Downtown business operations · Cannabis retail credentials
 
-**Submission behavior:**
-- `handleSubmit` currently simulates a 1.2s async delay then sets `submitted: true`
-- On success, replaces the form with an animated confirmation state
-- To connect a real backend, replace the `setTimeout` in `handleSubmit` with a `fetch` call to your API route or a service like Resend, Formspree, or Netlify Forms
+**Right column — contact form:**
 
-**Contact info sidebar:**
-- Email: hello@askzeus.io
-- Response time: 24 hours
-- Free consultation offer
-- "33+ Years" decorative card
+| Field | Type | Required |
+|-------|------|----------|
+| Full Name | text input | Yes |
+| Email Address | email input | Yes |
+| Company Name | text input | No |
+| Service Interest | dropdown | No |
+| Message | textarea (4 rows) | Yes |
+
+**On submit:**
+- POST to `/api/contact`
+- Shows loading spinner during submission
+- On success: animated checkmark + thank you message replaces the form
+- On error: red error message with fallback email address
 
 ---
 
 ### `Footer.tsx`
 
-Dark background footer. Three-column grid above a bottom bar.
+Dark background (`#0B1426`). Gold-tinted gradient line at top. Three-column grid.
 
-**Columns:**
-1. Logo + tagline + copyright
-2. Quick Links (same as nav)
-3. Service links (all scroll to `#services`)
+| Column | Content |
+|--------|---------|
+| 1 | Logo + "Ask Zeus. Get Answers." tagline + © 2025 Ask Zeus LLC |
+| 2 | Quick Links (Services, Why Us, Industries, Pricing, Contact) |
+| 3 | Service links (all four service packages linking to `#services`) |
 
-Gold-tinted gradient line at the very top of the footer separates it from the Contact section.
+Bottom bar: copyright left · "Built for small business. Powered by AI." right
 
-**Note:** Copyright year is currently hardcoded as `2024` — update this or make it dynamic with `new Date().getFullYear()`.
+---
+
+## Blog System
+
+### Overview
+
+The blog is built entirely with Next.js App Router server components and static site generation (SSG). No CMS or database — all posts are defined in `lib/blog.ts` as TypeScript objects.
+
+### File Structure
+
+```
+lib/blog.ts                       # All post data + getPostBySlug helper
+app/blog/page.tsx                 # Blog index (server component)
+app/blog/[slug]/page.tsx          # Individual post (SSG server component)
+components/BlogTeaser.tsx         # 3-post preview on homepage
+```
+
+### BlogPost Interface (`lib/blog.ts`)
+
+```typescript
+interface BlogPost {
+  slug: string         // URL path: /blog/[slug]
+  title: string        // H1 and og:title
+  date: string         // Display date e.g. "May 7, 2025"
+  description: string  // Post summary for card + meta description
+  keyword: string      // Target SEO keyword (shown as badge on post page)
+  metaTitle: string    // Unique <title> tag
+  metaDescription: string  // Unique <meta description>
+  readTime: string     // e.g. "5 min read"
+  content: string      // Full HTML string rendered via dangerouslySetInnerHTML
+}
+```
+
+### Current Blog Posts
+
+| Slug | Target Keyword | Date |
+|------|---------------|------|
+| `how-davis-restaurants-can-reduce-labor-costs-with-ai` | restaurant labor cost optimization Davis CA | May 7, 2025 |
+| `what-is-ai-consulting-for-small-businesses` | AI consulting small business Sacramento | Apr 28, 2025 |
+| `how-to-know-if-your-restaurant-menu-is-losing-you-money` | restaurant menu profitability analysis | Apr 15, 2025 |
+| `why-downtown-davis-businesses-are-falling-behind-without-analytics` | business analytics Davis CA | Apr 3, 2025 |
+
+### SEO Per Post
+
+Each post automatically gets:
+- Unique `<title>` from `metaTitle`
+- Unique `<meta description>` from `metaDescription`
+- Canonical URL: `https://www.askzeus.io/blog/[slug]`
+- Target keyword badge displayed on page
+- Internal links from homepage (BlogTeaser) and `/blog` index
+
+### Adding a New Blog Post
+
+1. Open `lib/blog.ts`
+2. Add a new object to the `blogPosts` array following the `BlogPost` interface
+3. Write the `content` field as an HTML string using `<h2>`, `<p>`, `<ul>`, `<li>`, `<strong>` tags
+4. Push — Next.js automatically generates the new route via `generateStaticParams`
+5. The sitemap updates automatically on next build via next-sitemap
+
+---
+
+## Contact Form & Email
+
+### How It Works
+
+1. User fills out the form on the homepage (`#contact`)
+2. Form POSTs JSON to `/api/contact` (Next.js API Route)
+3. The API route instantiates the Resend client using `RESEND_API_KEY`
+4. Sends a formatted HTML email from `hello@askzeus.io` to `hello@askzeus.io`
+5. The sender's email is set as `replyTo` — you can reply directly from your inbox
+6. Returns `{ success: true }` on success, `{ error: "..." }` with status 500 on failure
+
+### API Route (`app/api/contact/route.ts`)
+
+- `export const dynamic = 'force-dynamic'` — prevents static prerendering at build time
+- Resend client is instantiated inside the handler (not at module level) to avoid build-time errors when `RESEND_API_KEY` is not set
+- Validates that `name`, `email`, and `message` are present before sending
+- Returns Resend's `error` object if the send fails
+
+### Email Format
+
+Emails arrive at `hello@askzeus.io` with:
+- Subject: `New inquiry from [Name] ([Company])`
+- From: `Ask Zeus <hello@askzeus.io>`
+- Reply-To: the submitter's email address
+- Styled HTML body with all form fields
+
+### Resend Configuration
+
+- Domain `askzeus.io` is verified in Resend
+- API key stored as `RESEND_API_KEY` in Vercel environment variables (Production)
+- Free tier: 3,000 emails/month
+
+---
+
+## SEO & Metadata
+
+### Global Metadata (`app/layout.tsx`)
+
+```typescript
+metadata: {
+  title: 'Ask Zeus — AI + Operations Consulting | Davis & Sacramento CA',
+  description: 'AI-powered operations consulting for restaurants, retail, cafes, and hospitality in Davis and Sacramento CA...',
+  keywords: [
+    'AI consulting Davis CA',
+    'AI consulting Sacramento CA',
+    'operations consulting small business',
+    'restaurant analytics Davis CA',
+    'business health dashboard',
+    'ecommerce optimization Sacramento',
+    'direct ordering platform',
+    'AI reporting small business',
+    'UC Davis business consulting',
+    'restaurant POS analytics',
+  ],
+  openGraph: { ... }
+}
+```
+
+### Schema Markup (`app/layout.tsx`)
+
+Two JSON-LD scripts injected into `<head>` on every page:
+
+**LocalBusiness Schema:**
+```json
+{
+  "@type": "ProfessionalService",
+  "name": "Ask Zeus",
+  "url": "https://askzeus.io",
+  "email": "hello@askzeus.io",
+  "address": { "addressLocality": "Davis", "addressRegion": "CA" },
+  "areaServed": ["Davis, CA", "Sacramento, CA", "Yolo County, CA", "Sacramento County, CA"],
+  "knowsAbout": ["Restaurant Operations", "Retail Analytics", "Hospitality Management", "POS Integrations", "Ecommerce Optimization", "AI Reporting"]
+}
+```
+
+**FAQPage Schema** — 4 questions:
+1. What is AI consulting for small businesses?
+2. How much does Ask Zeus cost?
+3. What industries do you serve?
+4. How quickly will I see results?
+
+### Blog Post Metadata
+
+Each post in `app/blog/[slug]/page.tsx` uses `generateMetadata` to return:
+- Unique title from `post.metaTitle`
+- Unique description from `post.metaDescription`
+- Canonical URL: `https://www.askzeus.io/blog/${slug}`
+
+---
+
+## Sitemap & Robots
+
+### Sitemap Generation
+
+Powered by `next-sitemap`. Runs automatically after every build via the `postbuild` script in `package.json`:
+
+```json
+"postbuild": "next-sitemap"
+```
+
+**Config (`next-sitemap.config.js`):**
+```js
+module.exports = {
+  siteUrl: 'https://www.askzeus.io',
+  generateRobotsTxt: true,
+  sitemapSize: 7000,
+}
+```
+
+**Generated files (in `public/`):**
+- `sitemap.xml` — sitemap index
+- `sitemap-0.xml` — all page URLs
+- `robots.txt` — generated with bot rules (see below)
+
+**Submit to Google Search Console:** `https://www.askzeus.io/sitemap.xml`
+
+### robots.txt (`public/robots.txt`)
+
+```
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://askzeus.io/sitemap.xml
+```
+
+All major web crawlers and AI bots are explicitly allowed.
 
 ---
 
@@ -287,28 +539,33 @@ Gold-tinted gradient line at the very top of the footer separates it from the Co
 ### Prerequisites
 
 - Node.js 18.17 or later
-- npm 9+ (or pnpm / yarn)
+- npm 9+
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/askzeus.git
+git clone https://github.com/appark/askzeus.git
 cd askzeus
-
-# Install dependencies
 npm install
 ```
 
-### Run the Development Server
+### Environment Variables
+
+Create `.env.local` in the project root (this file is git-ignored):
+
+```env
+RESEND_API_KEY=re_your_api_key_here
+```
+
+Without this key, the contact form will fail locally. Get your key from [resend.com](https://resend.com).
+
+### Run Dev Server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-The page hot-reloads on file changes. All components are in `components/` — edit any file and see changes instantly.
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
@@ -317,51 +574,43 @@ The page hot-reloads on file changes. All components are in `components/` — ed
 ### Adding a New Section
 
 1. Create `components/YourSection.tsx`
-2. Import it in `app/page.tsx`
-3. Add a corresponding nav link in `Navbar.tsx` (`navLinks` array) and `Footer.tsx` (`quickLinks` array) if needed
-4. Give the section an `id` attribute matching the href (e.g., `id="your-section"` → `href="#your-section"`)
+2. Import and add `<YourSection />` to `app/page.tsx`
+3. Add a nav link to the `navLinks` array in `Navbar.tsx` and `Footer.tsx`
+4. Give the section `id="your-section"` matching the `href="#your-section"`
 
-### Updating Service Packages
+### Adding a New Blog Post
 
-Edit the `services` array in `components/Services.tsx`. Each item takes:
-```ts
-{
-  icon: LucideIconComponent,
-  title: string,
-  description: string,
-  color: string,        // Tailwind gradient class for hover accent
-  iconColor: string,    // Tailwind text color class
-  iconBg: string,       // Tailwind bg + ring class
-  hoverBorder: string,  // Tailwind hover border class
-  hoverGlow: string,    // Tailwind hover shadow class
-}
-```
+1. Open `lib/blog.ts`
+2. Add a new `BlogPost` object to the `blogPosts` array
+3. Write `content` as an HTML string
+4. Push — the route is auto-generated, sitemap updates on next build
+
+### Updating Differentiators or Stat Cards
+
+Edit the `differentiators` and `stats` arrays at the top of `components/WhyUs.tsx`.
 
 ### Updating Pricing
 
-Edit the `plans` array in `components/Pricing.tsx`. Set `popular: true` on whichever card should be featured.
+Edit the `plans` array in `components/Pricing.tsx`. Set `popular: true` on the featured tier.
 
-### Connecting the Contact Form
+### Updating Service Packages
 
-Replace the simulated submission in `Contact.tsx` `handleSubmit`:
+Edit the `services` array in `components/Services.tsx`. Each item takes an icon component, title, description, and Tailwind color classes.
 
-```ts
-const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault()
-  setLoading(true)
-  
-  await fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-  
-  setLoading(false)
-  setSubmitted(true)
-}
+### Scroll Animations Pattern
+
+All scroll-triggered sections follow this Framer Motion pattern:
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-100px' }}
+  transition={{ duration: 0.6, ease: 'easeOut' }}
+>
 ```
 
-Then create `app/api/contact/route.ts` to handle the submission (send email via Resend, save to database, post to Slack, etc.).
+For staggered groups use `variants` with `staggerChildren`.
 
 ---
 
@@ -371,251 +620,158 @@ Then create `app/api/contact/route.ts` to handle the submission (send email via 
 npm run build
 ```
 
-This runs the Next.js production build. Outputs to `.next/`. Check for any TypeScript or lint errors:
+This runs `next build` followed by `next-sitemap` (via the `postbuild` script), which regenerates `public/sitemap.xml`, `public/sitemap-0.xml`, and `public/robots.txt`.
 
 ```bash
-npm run lint
-```
-
-To preview the production build locally:
-
-```bash
-npm run start
+npm run lint    # Check for TypeScript/ESLint errors
+npm run start   # Preview production build locally
 ```
 
 ---
 
 ## Deployment
 
-This project is designed to deploy on **Vercel** with zero configuration.
+### Vercel Projects
 
-### Deploy via Vercel CLI
+There are two Vercel projects for this site:
+
+| Project | Account | Domain | Deploy Method |
+|---------|---------|--------|---------------|
+| `zeus-8a6a51bb/askzeus` | zeus-8a6a51bb | `www.askzeus.io` | **Auto-deploy from GitHub** (primary) |
+| `aggiedash/askzeus` | aggiedash | `askzeus.vercel.app` | Manual CLI deploy (secondary/ignore) |
+
+**Always use the `zeus-8a6a51bb/askzeus` project.** It auto-deploys on every push to `main` via the GitHub integration at `github.com/appark/askzeus`.
+
+### Deploy Flow
 
 ```bash
-npx vercel
+git add -A
+git commit -m "Your commit message"
+git push
+# Vercel auto-deploys to www.askzeus.io within ~60 seconds
 ```
 
-Follow the prompts. Vercel auto-detects Next.js.
+### Manual Deploy (if needed)
 
-### Deploy via GitHub Integration
+```bash
+vercel --prod
+```
 
-1. Push this repo to GitHub
-2. Import the repo at [vercel.com/new](https://vercel.com/new)
-3. Vercel auto-detects the framework, sets build command to `next build`, and output to `.next`
-4. Every push to `main` triggers an automatic production deploy
+Note: This deploys to `aggiedash/askzeus` (the secondary project). Prefer the GitHub push flow for `www.askzeus.io`.
 
-### Custom Domain
+### Environment Variables on Vercel
 
-Set `askzeus.io` as your domain in the Vercel dashboard under **Settings → Domains**. Vercel handles SSL automatically.
+Go to **vercel.com → askzeus project → Settings → Environment Variables**
+
+| Variable | Value | Environment |
+|----------|-------|-------------|
+| `RESEND_API_KEY` | Your Resend API key | Production |
+
+After adding or changing env vars, redeploy for them to take effect.
+
+---
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `RESEND_API_KEY` | Yes (production) | Resend API key for contact form email delivery |
+
+Local: create `.env.local` with the key.  
+Production: set in Vercel dashboard under Settings → Environment Variables.
 
 ---
 
 ## Customization Guide
 
-### Change the Brand Colors
+### Brand Colors
 
-All colors live in `tailwind.config.ts` under `theme.extend.colors`. The three key families are `electric`, `gold`, and `silver`. Updating a value there propagates everywhere on rebuild.
+All colors live in `tailwind.config.ts` under `theme.extend.colors`. The three key families are `electric` (primary accent), `gold` (Zeus/secondary accent), and `silver` (grays). Updating a value propagates everywhere on rebuild.
 
-### Change the Hero Headline
+### Hero Headline
 
 In `components/Hero.tsx`, find the `<h1>` block:
 ```tsx
 <span className="block ...">Ask Zeus.</span>
 <span className="block ...">Get Answers.</span>
 ```
+The second line uses gradient text (`bg-clip-text text-transparent bg-gradient-to-r`).
 
-The second line uses a gradient text effect (`bg-clip-text text-transparent bg-gradient-to-r`).
+### Stats Bar
 
-### Change the Stats Bar
+In `components/Hero.tsx`, find the three stat blocks (33 Years / 4 Core / AI-Powered) and update values and labels directly.
 
-In `components/Hero.tsx`, find the stats bar section (three inline stat blocks with labels "Experience", "Solutions", "Insights") and update the values and labels directly.
+### Contact Info
 
-### Change the "Why Us" Credentials
+In `components/Contact.tsx`, update the `contactInfo` array at the top of the file.
 
-In `components/WhyUs.tsx`, update the `differentiators` array (bullet points) and the `stats` array (the four stat cards on the right).
+### From/To Email in Contact Form
 
-### Update Contact Info
-
-In `components/Contact.tsx`, find the `contactInfo` array at the top. Update the email href and value there.
-
----
-
-## SEO & Metadata
-
-Metadata is defined in `app/layout.tsx` using the Next.js Metadata API:
-
+In `app/api/contact/route.ts`:
 ```ts
-export const metadata: Metadata = {
-  title: 'Ask Zeus — AI + Operations Consulting',
-  description: '...',
-  keywords: [...],
-  openGraph: {
-    title: '...',
-    description: '...',
-    url: 'https://askzeus.io',
-    siteName: 'Ask Zeus',
-    type: 'website',
-  },
-}
+from: 'Ask Zeus <hello@askzeus.io>',
+to: 'hello@askzeus.io',
 ```
+Both require the `askzeus.io` domain to be verified in Resend.
 
-**To add Twitter/X card metadata**, extend with:
-```ts
-twitter: {
-  card: 'summary_large_image',
-  title: 'Ask Zeus — AI + Operations Consulting',
-  description: '...',
-}
-```
+### Adding an OG Image
 
-**To add a favicon**, place `favicon.ico` and optionally `apple-touch-icon.png` in the `app/` directory — Next.js picks them up automatically.
+Place `opengraph-image.png` (1200×630px) in the `app/` directory — Next.js serves it automatically at `/opengraph-image`.
 
-**To add an OG image**, place a `opengraph-image.png` (1200×630px) in the `app/` directory and Next.js will serve it automatically at `/opengraph-image`.
+### Adding a Favicon
+
+Place `favicon.ico` in the `app/` directory — Next.js picks it up automatically.
 
 ---
 
 ## Business Context
 
-### Why Ask Zeus Exists
+### What Ask Zeus Does
 
-Ask Zeus was not created to be a "computer company" or an "AI company." It was created to be a **Business Operations Optimization Company** — one that happens to use AI and modern technology as the engine.
+Ask Zeus is an **AI-powered business operations consulting firm** serving small businesses in Davis CA, Sacramento CA, and surrounding areas. The focus is on practical results — reducing costs, increasing profits, and surfacing insights from data — not technology for its own sake.
 
-The founding insight is simple: **business owners do not care about AI, APIs, Docker, or dashboards. They care about making more money, saving labor, reducing waste, understanding their sales, and getting customers to come back.** The technology is just the delivery mechanism for those outcomes.
+**Target clients:** Restaurants, retail stores, cafes, and hospitality businesses that are operating on thin margins with disconnected systems, no real analytics, and no visibility into what is actually happening in their business.
 
-The problem is real. Thousands of downtown small businesses — restaurants, cafes, retail shops, bars, hospitality operators — are operating on thin margins with disconnected systems, no real analytics, and no visibility into what is actually happening in their business. Most are still using:
-
-- Spreadsheets for tracking and reporting
-- Basic POS exports they may never actually look at
-- Disconnected apps that do not talk to each other
-- Zero automation
-- No understanding of labor cost ratios, food cost percentages, or customer retention patterns
-
-These businesses are overwhelmed, understaffed, and drowning in operational complexity. They do not have the time or the technical background to solve it themselves. That is the market Ask Zeus was built to serve.
-
----
-
-### The Founder Advantage
-
-Most people entering the AI consulting space right now know AI tools, coding, and prompts. What they do not know is how to run a business. They have never:
-
-- Managed food costs against budget at the end of a week
-- Dealt with a broken POS system at 8pm on a Friday night
-- Built a labor schedule that accounts for both coverage and overtime laws
-- Integrated a loyalty program with an ecommerce platform
-- Pulled a compliance report from a cannabis POS system
-- Fought DoorDash on commission fees while maintaining online order volume
-
-Ask Zeus was founded by people who have actually done those things. The combined background spans:
+### Founder Background
 
 | Domain | Experience |
 |--------|-----------|
-| Enterprise IT Leadership | 33 years leading IT at UC Davis — scaled systems for 30,000+ students, faculty, and staff. Zero tolerance for downtime. Real budget accountability. |
-| Hospitality Operations | Marriott hotel operations experience — hands-on food & beverage cost control, labor scheduling, guest experience management, and occupancy optimization. |
-| Cannabis Retail & Ecommerce | Built and managed retail ecommerce on the Treez platform — POS integrations, loyalty programs, online menus, delivery operations, and compliance reporting. |
-| Marketing & SEO | End-to-end digital marketing, search optimization, analytics, and conversion tracking across ecommerce and local business contexts. |
-| Automation & Integrations | Docker, Vercel, n8n, API integrations, custom dashboards, and reporting pipelines connecting disparate business systems. |
+| Enterprise IT Leadership | 33+ years — UC Davis enterprise IT, scaled systems for 30,000+ users |
+| Downtown Business Operations | Hands-on experience across hospitality, retail, and food service |
+| Cannabis Retail & Ecommerce | POS integrations (Treez platform), loyalty programs, online menus, delivery operations, compliance reporting |
+| Marketing & SEO | End-to-end digital marketing, search optimization, analytics, conversion tracking |
+| Automation & Integrations | Docker, Vercel, n8n, API integrations, custom dashboards, reporting pipelines |
 
-This combination is extremely rare in the consulting market. Pure tech consultants lack operational depth. Pure operations consultants lack technical execution capability. Ask Zeus sits at the intersection of both — and that is the entire basis of the pitch to clients.
-
----
-
-### Why Downtown Businesses Specifically
-
-The decision to focus on downtown small businesses — and not to market broadly as a generic "AI consultant for everyone" — was deliberate and strategic.
-
-**The opportunity:**
-- Downtown businesses have existing relationships and community trust that make referrals powerful
-- Local operators are far more technologically behind than, say, cannabis retail was before it was forced to modernize
-- The problems are universal across the vertical: thin margins, high labor costs, disconnected systems, no reporting visibility
-- Decision-makers are accessible — you can walk in and have a conversation
-- Local reputation compounds quickly; one great result leads to five more clients
-
-**The cannabis retail comparison is instructive.** Cannabis operators had to modernize extremely fast because of delivery requirements, compliance needs, ecommerce mandates, and loyalty program competition. They built sophisticated digital operations under pressure. Most downtown restaurants and retail shops have had no such forcing function — they are still operating the way they did in 2015. That gap is the opportunity.
-
----
-
-### What Ask Zeus Actually Sells
-
-The four service packages on this website are not software products. They are consulting and integration services structured around the specific outcomes business owners care about:
+### The Four Services
 
 **1. Business Health Dashboard**
-The easiest entry point and the fastest path to client trust. Connect the client's existing systems — POS, payroll platform, ecommerce, website analytics, Google reviews, marketing data — and surface the insights they cannot currently see:
-- Sales trends by day, shift, and product
-- Labor cost as a percentage of revenue (the number most operators do not actually know)
-- Best-selling and worst-selling menu items or products
-- Slow-moving inventory
-- Hourly performance patterns and staffing inefficiencies
-- Profit leaks they did not know existed
-
-Most clients do not need new systems. They need someone to connect and interpret the systems they already have.
+Connects existing systems (POS, payroll, ecommerce, analytics, reviews) and surfaces insights owners cannot currently see: sales by shift, labor cost as % of revenue, slow-moving inventory, profit leaks. Most clients do not need new systems — they need someone to connect and interpret what they already have.
 
 **2. AI Reporting Assistant**
-Once the data is flowing, layer in a conversational AI interface using Claude and OpenAI APIs. Instead of logging into multiple dashboards, a manager can ask:
-- "Why were sales down on Tuesday?"
-- "Which products are underperforming this month?"
-- "What are our peak labor cost hours?"
-- "Summarize last week's performance."
-- "Which menu items have the highest margin?"
-
-This becomes the client's always-on business analyst — available at any hour, speaking plain English, pulling from real data.
+Conversational AI interface using Claude/OpenAI APIs. Managers ask plain-English questions ("Why were sales down Tuesday?", "Which items have the highest margin?") and get instant answers from real business data.
 
 **3. Ecommerce Optimization**
-Treez ecommerce and cannabis retail experience translates directly to any business with an online presence. Services include SEO, page speed optimization, Vercel deployments, analytics setup, conversion rate tracking, abandoned cart analysis, loyalty system implementation, and AI-assisted SEO content. Most downtown businesses have terrible websites. Dramatic improvements are achievable relatively quickly.
+SEO, page speed, Vercel deployments, analytics, conversion tracking, loyalty systems, AI-assisted content. Most downtown businesses have poor online presences — dramatic improvements are achievable fast.
 
 **4. Direct Ordering Platform**
-The long-term, high-value play. Build a branded ordering platform that lets restaurants and retailers accept direct online orders without paying 15–30% commission to DoorDash or Uber Eats. Potentially expand into a local delivery network using student drivers and community partners — a lower-fee alternative to third-party delivery platforms. This is a standalone business opportunity in itself. It is the fourth service on the site but strategically it is the biggest long-term value creation opportunity. It should be built after the first three services have established client relationships and operational credibility.
+Branded ordering platform that lets restaurants and retailers accept direct online orders without paying 15–30% commission to DoorDash or Uber Eats. The largest long-term value creation opportunity in the service lineup.
 
----
+### Pricing Strategy
 
-### Pricing Strategy and Revenue Model
+| Stage | What It Is | Price |
+|-------|-----------|-------|
+| Business Audit | Systems review, inefficiency report | $500–$1,500 |
+| Setup Project | Custom dashboard, integration, platform build | $5,000–$20,000 |
+| Monthly Retainer | Ongoing monitoring, optimization, support | $500–$3,000/mo |
 
-The pricing shown on this site represents the ongoing **retainer** model, which is the core revenue engine of the business. The full engagement path looks like this:
+Ten clients at $1,500/month = $180K/year in recurring revenue before any project work.
 
-| Stage | What It Is | Price Range | Purpose |
-|-------|-----------|-------------|---------|
-| Business Audit | Systems review, inefficiency report, recommendations | $500–$1,500 | Low-risk entry point for skeptical clients |
-| Setup Project | Custom dashboard, integration, platform build | $5,000–$20,000 | Primary upfront revenue, also establishes the relationship |
-| Monthly Retainer | Ongoing monitoring, optimization, reporting, support | $500–$3,000/mo | Recurring revenue; this is what scales the business |
+### Service Area
 
-**The audit is the door opener.** It is priced low enough that a business owner can say yes without a long decision cycle. It almost always reveals enough problems that the client wants the full setup engagement.
-
-**The setup project is the credibility builder.** A $16K project for a single client is both realistic and well within market range for the value delivered. One successful project becomes a case study that sells the next five.
-
-**The retainer is the real business.** Ten clients at $1,500/month each is $180K/year in recurring revenue — before any new project work. That is the financial model that makes this sustainable.
-
----
-
-### Realistic Financial Outlook
-
-Based on the business strategy, here is the projected growth path:
-
-**Year 1 (Part-Time / Launch Phase)**
-- Focus: 3–8 clients, smaller projects, local referrals, one pilot at discounted rate to build case study
-- Revenue estimate: $50,000–$150,000
-- Key leverage points: Davis network, local business relationships, former civic connections
-
-**Year 2 (Referral Growth Phase)**
-- Focus: Retainer base building, packaged services, stronger local reputation
-- Revenue estimate: $150,000–$350,000
-
-**Year 3+ (Scale Phase)**
-- Focus: Productized services, standardized AI reporting system, possible expansion of direct ordering platform into a standalone product
-- Revenue estimate: $500,000+
-
-The critical discipline in Year 1 is **not overbuilding.** The biggest risk for technically capable founders is building complex custom software before you have paying clients who need it. Start with consulting and integration. Use off-the-shelf tools (n8n, Supabase, Looker Studio, existing POS APIs) wherever possible. Turn the best solutions into reusable products only after the client demand is proven.
-
----
-
-### The Team Structure
-
-Ask Zeus is a father-son venture. This is a strength, not a constraint.
-
-The operational and technical founder brings IT leadership, hospitality operations, cannabis retail, and full-stack development capability. The business analysis and financial modeling comes from the co-founder, who brings a business background that complements the technical and operational depth.
-
-Critically, **neither founder needs to quit their current role to start this business.** This is intentional. Starting part-time — evenings and weekends, with a discounted pilot client — is the right approach. It keeps risk low, allows for learning, and lets the business prove its value before anyone depends on it as their primary income. The right time to go full-time is when retainer revenue is sufficient to replace what is being left behind.
+Davis CA · Sacramento CA · Woodland CA · West Sacramento CA · Elk Grove CA · Yolo County · Sacramento County
 
 ---
 
 ## License
 
-Private — All rights reserved. Ask Zeus LLC © 2024.
+Private — All rights reserved. Ask Zeus LLC © 2025.
