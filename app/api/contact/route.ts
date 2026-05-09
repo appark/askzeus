@@ -12,8 +12,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    await resend.emails.send({
-      from: 'Ask Zeus <hello@askzeus.io>',
+    const { error: sendError } = await resend.emails.send({
+      from: 'Ask Zeus <onboarding@resend.dev>',
       to: 'hello@askzeus.io',
       replyTo: email,
       subject: `New inquiry from ${name}${company ? ` (${company})` : ''}`,
@@ -55,6 +55,11 @@ export async function POST(request: Request) {
         </div>
       `,
     })
+
+    if (sendError) {
+      console.error('Resend error:', sendError)
+      return NextResponse.json({ error: sendError.message }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
