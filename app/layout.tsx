@@ -6,15 +6,17 @@ const localBusinessSchema = {
   '@type': 'ProfessionalService',
   name: 'Ask Zeus',
   url: 'https://askzeus.io',
-  description: 'AI-powered operations consulting for small businesses.',
+  email: 'hello@askzeus.io',
+  description: 'AI-powered operations consulting for restaurants, retail, cafes, and hospitality businesses in Davis and Sacramento CA.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Davis',
     addressRegion: 'CA',
     addressCountry: 'US',
   },
-  areaServed: 'US',
+  areaServed: ['Davis, CA', 'Sacramento, CA', 'Yolo County, CA', 'Sacramento County, CA'],
   serviceType: 'AI and Operations Consulting',
+  knowsAbout: ['Restaurant Operations', 'Retail Analytics', 'Hospitality Management', 'POS Integrations', 'Ecommerce Optimization', 'AI Reporting'],
 }
 
 const faqSchema = {
@@ -57,22 +59,25 @@ const faqSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'Ask Zeus — AI + Operations Consulting',
+  title: 'Ask Zeus — AI + Operations Consulting | Davis & Sacramento CA',
   description:
-    'AI-powered operations consulting for small businesses. Business Health Dashboards, AI Reporting, Ecommerce Optimization, and Direct Ordering Platforms.',
+    'AI-powered operations consulting for restaurants, retail, cafes, and hospitality in Davis and Sacramento CA. Business Health Dashboards, AI Reporting, Ecommerce Optimization, and Direct Ordering Platforms. 33 years of IT and operations experience.',
   keywords: [
-    'AI consulting',
-    'operations consulting',
-    'small business AI',
+    'AI consulting Davis CA',
+    'AI consulting Sacramento CA',
+    'operations consulting small business',
+    'restaurant analytics Davis CA',
     'business health dashboard',
-    'ecommerce optimization',
+    'ecommerce optimization Sacramento',
     'direct ordering platform',
-    'AI reporting',
+    'AI reporting small business',
+    'UC Davis business consulting',
+    'restaurant POS analytics',
   ],
   openGraph: {
-    title: 'Ask Zeus — AI + Operations Consulting',
+    title: 'Ask Zeus — AI + Operations Consulting | Davis & Sacramento CA',
     description:
-      'AI-powered operations consulting for small businesses. Transform your operations with 33 years of expertise.',
+      'AI-powered operations consulting for small businesses in Davis and Sacramento CA. 33 years of IT and operations expertise including UC Davis and Marriott.',
     url: 'https://askzeus.io',
     siteName: 'Ask Zeus',
     type: 'website',

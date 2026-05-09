@@ -142,8 +142,8 @@ export default function Hero() {
           variants={itemVariants}
           className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-silver-400 sm:mb-10 sm:text-xl"
         >
-          Transform your small business with AI-powered insights and{' '}
-          <span className="text-silver-200 font-medium">33 years</span> of real-world operations expertise.
+          AI-powered operations consulting for restaurants, retail, and hospitality in{' '}
+          <span className="text-silver-200 font-medium">Davis &amp; Sacramento, CA</span> — backed by 33 years of real-world expertise.
         </motion.p>
 
         {/* CTA Buttons */}

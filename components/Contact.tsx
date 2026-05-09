@@ -155,7 +155,7 @@ export default function Contact() {
               <div className="text-gold-400 text-4xl font-display font-bold mb-2">33+</div>
               <div className="text-white font-semibold mb-1">Years of Real-World Experience</div>
               <div className="text-silver-400 text-sm leading-relaxed">
-                We have been in the trenches. We know what works, what does not, and how to get you to results faster.
+                UC Davis enterprise IT · Marriott hospitality operations · Cannabis retail &amp; ecommerce. Serving Davis, Sacramento, and surrounding areas.
               </div>
             </div>
           </motion.div>

@@ -4,16 +4,16 @@ import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
 
 const differentiators = [
-  'Deep operations expertise across IT, logistics, and fulfillment',
-  'AI-first approach tailored for small business realities',
-  'Hands-on implementation, not just strategy decks',
-  'Proven results with measurable ROI',
+  'UC Davis enterprise IT leadership — we know systems that scale',
+  'Marriott hospitality operations experience built into every engagement',
+  'Cannabis retail & ecommerce — POS integrations, analytics, and compliance',
+  'Hands-on implementation for Davis, Sacramento, and surrounding businesses',
 ]
 
 const stats = [
   { value: '33+', label: 'Years of IT & Operations Experience', accent: 'text-electric-400' },
-  { value: '4', label: 'Tailored Service Offerings', accent: 'text-gold-400' },
-  { value: '100%', label: 'Focus on Small Business Success', accent: 'text-electric-400' },
+  { value: 'UC Davis', label: 'Enterprise IT Leadership Background', accent: 'text-gold-400' },
+  { value: 'Marriott', label: 'Hospitality Operations Expertise', accent: 'text-electric-400' },
   { value: 'AI-First', label: 'Methodology & Tooling', accent: 'text-gold-400' },
 ]
 
