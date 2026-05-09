@@ -13,8 +13,8 @@ export async function POST(request: Request) {
     }
 
     const { error: sendError } = await resend.emails.send({
-      from: 'Ask Zeus <onboarding@resend.dev>',
-      to: 'alex.park@askzeus.io',
+      from: 'Ask Zeus <hello@askzeus.io>',
+      to: 'hello@askzeus.io',
       replyTo: email,
       subject: `New inquiry from ${name}${company ? ` (${company})` : ''}`,
       html: `
