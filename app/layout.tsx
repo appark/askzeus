@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Ask Zeus — AI + Operations Consulting | Davis & Sacramento CA',
     description:
-      'AI-powered operations consulting for small businesses in Davis and Sacramento CA. 33 years of IT and operations expertise including UC Davis and Marriott.',
+      'AI-powered operations consulting for small businesses in Davis and Sacramento CA. 33 years of IT and operations expertise including UC Davis enterprise IT and downtown business operations.',
     url: 'https://askzeus.io',
     siteName: 'Ask Zeus',
     type: 'website',

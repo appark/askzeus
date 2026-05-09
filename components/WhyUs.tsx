@@ -5,7 +5,7 @@ import { Check, ArrowRight } from 'lucide-react'
 
 const differentiators = [
   'UC Davis enterprise IT leadership — we know systems that scale',
-  'Marriott hospitality operations experience built into every engagement',
+  'Downtown business operations experience across hospitality, retail, and food service',
   'Cannabis retail & ecommerce — POS integrations, analytics, and compliance',
   'Hands-on implementation for Davis, Sacramento, and surrounding businesses',
 ]
@@ -13,7 +13,7 @@ const differentiators = [
 const stats = [
   { value: '33+', label: 'Years of IT & Operations Experience', accent: 'text-electric-400' },
   { value: 'UC Davis', label: 'Enterprise IT Leadership Background', accent: 'text-gold-400' },
-  { value: 'Marriott', label: 'Hospitality Operations Expertise', accent: 'text-electric-400' },
+  { value: 'Downtown', label: 'Business Operations Experience', accent: 'text-electric-400' },
   { value: 'AI-First', label: 'Methodology & Tooling', accent: 'text-gold-400' },
 ]
 
