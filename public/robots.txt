@@ -10,7 +10,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Googlebot
-Allow: /
-
 Sitemap: https://www.askzeus.io/sitemap.xml
