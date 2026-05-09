@@ -24,7 +24,7 @@ export default function BlogTeaser() {
   const recentPosts = blogPosts.slice(0, 3)
 
   return (
-    <section className="bg-silver-50 py-16 sm:py-20 md:py-28">
+    <section className="bg-silver-50 pt-0 pb-16 sm:pb-20 md:pb-28">
       <div className="mx-auto max-w-[1680px] px-6 sm:px-10 xl:px-16">
         {/* Section header */}
         <motion.div
